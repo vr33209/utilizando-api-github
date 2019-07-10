@@ -20,7 +20,10 @@ export const Container = styled.div`
   }
 `;
 
-export const Form = styled.form`
+export const Form = styled.form.attrs(props => ({
+  type: "text",
+  error: props.error
+}))`
   margin-top: 30px;
   display: flex;
   flex-direction: row;
@@ -32,6 +35,14 @@ export const Form = styled.form`
     border-radius: 40x;
     font-size: 16px;
   }
+
+  ${props =>
+    props.error &&
+    css`
+      input {
+        border: 1px solid #dc3545;
+      }
+    `}
 `;
 
 const rotate = keyframes`

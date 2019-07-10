@@ -13,7 +13,8 @@ class Main extends Component {
   state = {
     newRepo: "",
     repositories: [],
-    loading: false
+    loading: false,
+    error: false
   };
 
   componentDidMount() {
@@ -51,11 +52,12 @@ class Main extends Component {
       this.setState({
         repositories: [...repositories, data],
         newRepo: "",
-        loading: false
+        loading: false,
+        error: false
       });
     } catch (error) {
       toast.error("Repositório não encontrado!");
-      this.setState({ loading: false });
+      this.setState({ loading: false, error: true });
     }
   };
 
@@ -73,7 +75,7 @@ class Main extends Component {
           <FaGithubAlt />
           Repositórios
         </h1>
-        <Form onSubmit={this.handleSubmit}>
+        <Form onSubmit={this.handleSubmit} error={this.state.error}>
           <input
             type="text"
             placeholder="Adicionar Repositório"
